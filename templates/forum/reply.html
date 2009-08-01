@@ -1,9 +1,9 @@
 {% extends "forum_base.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans with thread.title as title %}Reply to thread  "{{ title }}"{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with thread.title as title %}Reply to thread "{{ title }}"{% endblocktrans %}{% endblock %}
 
-{% block pagetitle %}{% blocktrans with thread.title as title %}Reply to Thread "{{ title }}"{% endblocktrans %}{% endblock %}
+{% block pagetitle %}{% blocktrans with thread.title as title %}Reply to thread "{{ title }}"{% endblocktrans %}{% endblock %}
 
 {% block breadcrumbs %}{% for title, url in thread.forum.get_url_name %} &raquo; <a href='{{ url }}'>{{ title }}</a>{% endfor %} &raquo; <a href='{{ thread.get_absolute_url }}'>{{ thread.title|escape }}</a> &raquo; {% trans "Reply" %}{% endblock %}
 
