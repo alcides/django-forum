@@ -95,7 +95,7 @@ def reply(request, thread):
     to a thread. Note we don't have "nested" replies at this stage.
     """
     if not request.user.is_authenticated():
-        return HttpResponseServerError()
+        return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
     t = get_object_or_404(Thread, pk=thread)
     if t.closed:
         return HttpResponseServerError()
@@ -176,7 +176,7 @@ def newthread(request, forum):
     Only allows a user to post if they're logged in.
     """
     if not request.user.is_authenticated():
-        return HttpResponseServerError()
+        return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
 
     f = get_object_or_404(Forum, slug=forum)
     
@@ -221,7 +221,7 @@ def updatesubs(request):
     Allow users to update their subscriptions all in one shot.
     """
     if not request.user.is_authenticated():
-        return HttpResponseForbidden(_('Sorry, you need to login.'))
+        return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
 
     subs = Subscription.objects.select_related().filter(author=request.user)
 
